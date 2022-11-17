@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    transition: background 0.2s linear;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+.dark {
+    background: #212529;
+}
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: #f8f9fa;
+}
+.loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font: 14px arial;
+}

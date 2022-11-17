@@ -1,0 +1,371 @@
+<html>
+    <head>
+    <title>Sesi-5 Test Login dan Logout</title>
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css" rel="stylesheet" />
+        <link href="style.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <!-- Preloader-->
+        <div class="preloader">
+            <div class="loading">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+        </div>
+
+        <!-- Container -->
+
+        <div class="container-xl pt-3">
+            <!-- Header -->
+            <div class="pt-5" id="headerHomePage">
+                <header class="p-2 text-center text-lg-start text-muted border-bottom user-select-none">
+                    <section class="d-sm-flex justify-content-sm-between justify-content-center">
+                    <!-- Left -->
+                    <div id="titleHomePage">
+                        <h2><i class="fas fa-lock m-1"></i> dodemahadi.id</h2>
+                    </div>
+                    <!-- Left --> 
+    
+                    <!-- Right -->
+                    <div> 
+                        <div class="me-md-1">
+                            <button class="btn btn-primary text-light m-2 me-md-1" type="submit" data-mdb-toggle="modal" data-mdb-target="#popupLogin">Login</button>
+    
+                            <button class="btn btn-primary text-light m-2 me-md-1" type="submit" data-mdb-toggle="modal" data-mdb-target="#popupRegister">Register</button>
+    
+                            <button class="btn btn-primary text-light m-2 me-md-1" type="submit" id="chk" onClick="darkLightMode()"/><span id="checkMode">Dark</span></button>
+                        </div>
+                    </div>
+                    <!-- Right -->
+                    </section>
+                </header>       
+            </div>         
+
+            <div id="loginBody">
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </symbol>
+                    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </symbol>
+                    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </symbol>
+                </svg>
+
+                <div class="alert alert-info my-2" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                    Website <strong>dodemahadi.id</strong> masih dalam tahap pengembangan !
+                    <br />
+                    <br />
+                    Features: MDBootstrap Framework, Validated Form, Dark/Light Switch Mode, UI/UX Friendly
+                </div>
+
+                <!-- Modal Login -->
+                <div
+                class="modal fade"
+                id="popupLogin"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+                >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title user-select-none w-100 font-weight-bold" id="loginText">Login</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                        <!-- Username input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="usernameInput" class="form-control" />
+                                <label class="form-label" for="usernameInput">Username</label>
+                            </div>
+                                                            
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" id="passwordInput" class="form-control" />
+                                <label class="form-label" for="passwordInput">Password</label>
+                            </div>
+
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="showPwd()" />
+                                <label class="form-check-label text-info" for="flexCheckDefault">Show Password</label>
+                            </div>
+
+                            <div>
+                                <span class="text-danger user-select-none" id="logAlert"></span>                        
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <!-- Submit button -->
+                        <button type="button" class="btn btn-primary" onclick="onLogin()" id="loginButton">Sign in</button>
+
+                        <!-- Forgot Pwd button -->
+                        <!-- <button type="button" class="btn btn-danger" onclick="forgotPwdTab()" id="loginButton" disabled>Forgot Password</button> -->
+                    </div>
+                </div>
+                </div>
+                </div>
+
+                <!-- Modal Register -->
+                <div
+                class="modal fade"
+                id="popupRegister"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+                >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title user-select-none w-100 font-weight-bold" id="registerText">Register</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <form name="registerForm">
+                            <!-- Username input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="usernameRegister" class="form-control" />
+                                <label class="form-label" for="usernameRegister">Username</label>
+                            </div>
+                                
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" id="passwordRegister" class="form-control" />
+                                <label class="form-label" for="passwordRegister">Password</label>
+                            </div>
+
+                             <!-- Confirm Password input -->
+                             <div class="form-outline mb-4">
+                                <input type="password" id="passwordRegister2" class="form-control" />
+                                <label class="form-label" for="passwordRegister2">Confirm Password</label>
+                            </div>
+
+                            <div class="mb-3">
+                                <span class="text-danger user-select-none" id="regAlert"></span>
+                                <span class="text-success user-select-none" id="regSuccess"></span>
+                            </div>
+                            
+                            <!-- Reset button -->
+                            <button type="reset" class="btn btn-secondary">Reset</button>     
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <!-- Submit button -->
+                        <button type="button" class="btn btn-danger" onclick="onRegister()" id="registerButton">Sign up</button>      
+                    
+                    </div>
+                </div>
+                </div>
+                </div>                
+
+                <!-- Footer -->
+                <footer class="mt-2 p-3 text-center text-lg-start text-muted border-top">
+                    <section class="d-md-flex justify-content-sm-between justify-content-center">
+                    <!-- Left -->
+                    <div class="me-1 d-lg-block">
+                        Made with <i class="fas fa-heart" aria-hidden="true" style="color:#be1931"></i> by <a class="text-reset fw-bold" href="#">dodemahadi.id</a> @ 2022 <i class="flag flag-id m-1"></i>
+                    </div>
+                    <!-- Left --> 
+            
+                    <!-- Right -->
+                    <div>
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/DodePersie" target="_blank" class="p-2"><i class="fab fa-facebook-f"></i></a>
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/DodePersie" target="_blank"><i class="fab fa-instagram"></i></a>   
+                    </div>
+                    <!-- Right -->
+                    </section>
+                </footer>
+            </div>
+        </div>
+
+        <!-- ROLE ADMIN -->
+        <div id="adminBody">
+            <div class="container-xl p-4">
+                 <!-- Header -->
+                    <header class="p-2 text-center text-lg-start text-muted border-bottom user-select-none">
+                        <section class="d-flex justify-content-sm-between justify-content-center">
+                            <!-- Left -->
+                            <div class="me-5" id="titleAdmin">
+                                <h2><i class="fas fa-om"></i> dodemahadi.id</h2>
+    
+                                <div class="m-2">
+                                   <!--<span class="badge bg-primary">Role: <span id="checkRole" /></span>-->
+                                </div>
+                            </div>
+                            <!-- Left --> 
+    
+                            <!-- Right -->
+                            <div> 
+                                <button class="btn btn-primary text-light float-end" type="submit" id="chk" onClick="darkLightMode()"/><span id="checkModeAdmin">Dark</span></button>
+                            </div>
+                            <!-- Right -->
+                        </section>
+                    </header>           
+
+                <div class="row">
+                    <!-- 1st content-->
+                    <div class="col-md-4 p-3">
+                        <div class="card" id="card">
+                            <img src="pic.jpg" class="card-img-top" alt="My Picture" />
+                            <div class="card-body">
+                              <h5 class="card-title" style="cursor: help;">About me</h5>
+                              <p class="card-text">Hello, my name is <strong>I Dewa Gede Mahadi Saputra</strong>. I'm from <strong>Bali, Indonesia</strong>, currently i'm a student at <strong>ITB STIKOM Bali</strong>. I can work with team. I love to listening music, playing games and doing some coding <i class="far fa-grin-squint"></i></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2nd content -->
+                    <div class="col-md-4 p-3">
+                        <h5 class="border-bottom pb-3" style="cursor: help;"><i class="fas fa-graduation-cap"></i> Educational Background</h5>
+                        <ul class="list-group list-group-light list-group-small">
+                            <li class="list-group-item px-2 bg-light">TK Mandung <span class="badge bg-primary float-end">2006</span></li>
+                            <li class="list-group-item px-2 bg-light">TK Star Kids <span class="badge bg-primary float-end">2007</span></li>
+                            <li class="list-group-item px-2 bg-light">SD Bintang Persada <span class="badge bg-primary float-end">2007-2013</span></li>
+                            <li class="list-group-item px-2 bg-light">SMP N 1 Tabanan <span class="badge bg-primary float-end">2013-2016</span></li>
+                            <li class="list-group-item px-2 bg-light">SMA N 1 Tabanan <span class="badge bg-primary float-end">2016-2019</span></li>
+                            <li class="list-group-item px-2 bg-light">ITB STIKOM Bali <span class="badge bg-primary float-end">2019-current</span></li>
+                        </ul>
+
+                        <div class="mt-4">
+                            <h5 class="border-bottom pb-3" style="cursor: help;"><i class="fas fa-code"></i> My Experiences</h5>
+                            <ul class="list-group list-group-light list-group-small">
+                                <li class="list-group-item px-2 bg-light">Blogging <i class="fab fa-blogger m-1" data-mdb-toggle="tooltip" title="Blogger"></i> <i class="fab fa-wordpress m-1" data-mdb-toggle="tooltip" title="Wordpress"></i> <span class="badge bg-primary float-end">2011-2013</span></li>
+                                <li class="list-group-item px-2 bg-light">Web Dev <i class="fab fa-html5 m-1" data-mdb-toggle="tooltip" title="HTML5"></i> <i class="fab fa-css3-alt m-1" data-mdb-toggle="tooltip" title="CSS3"></i> <i class="fab fa-php m-1" data-mdb-toggle="tooltip" title="PHP"></i> <i class="fas fa-database m-1" data-mdb-toggle="tooltip" title="mySQL"></i><span class="badge bg-primary float-end">2012-2015</span></li>
+                                <li class="list-group-item px-2 bg-light">Twitter API <span class="badge bg-primary float-end">2013-2015</span></li>
+                                <li class="list-group-item px-2 bg-light">Selling Twitter Followers <span class="badge bg-primary float-end">2013-2015</span></li>
+                            </ul>
+                        </div>     
+                    </div>
+
+                    <!-- 3rd content -->
+                    <div class="col-md-4 p-3">
+                        <h5 class="border-bottom pb-3" style="cursor: help;"><i class="fas fa-trophy"></i> Achievement List</h5>
+                        <ul class="list-group list-group-light list-group-small">
+                            <li class="list-group-item px-2 bg-light">Elementary Level Computer Competition <span class="badge bg-primary">1st</span><span class="badge bg-primary mx-1">2012</span></li>
+                            <li class="list-group-item px-2 bg-light">Log-Off Junior Computer Competition <span class="badge bg-primary">2nd</span><span class="badge bg-primary mx-1">2015</span></li>
+                        </ul>
+                        
+                        <div class="card mt-3" id="moreAboutCard">
+                            <div class="card-body">
+                                <h5 class="card-title" style="cursor: help;">More About Me</h5>
+                                
+                                <p class="card-text col-12 text-truncate">First, I bought a computer by my mother in 2009. At that time I only used the computer only to play offline games. Then, I was bought a Modem in 2011 at that time I was still in elementary school and trying to make a blog. In 2011 I started to create a blog, which I named DODE-XP, the name was inspired by the legendary blog at that time namely RIMO-XP which contained software, games, office, etc.</p> 
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#moreAboutMe">
+                                    Read more
+                                </button>
+
+                                <!-- Modal -->
+                                <div
+                                class="modal fade"
+                                id="moreAboutMe"
+                                tabindex="-1"
+                                aria-labelledby="moreAboutCardLabel"
+                                aria-hidden="true"
+                                >
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content" id="moreAboutCardMore">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="moreAboutCardLabel">More About Me</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>When I was managing a blog, there was a lot I learned about HTML and CSS, my blog switched platforms from Blogger to Wordpress in 2012, I bought hosting and domain with a total of 120,000 IDR at that time, I bought a domain with the name DODE-XP.COM</p>
+                                        
+                                        <p>And in 2011 to 2012 I got a lot of friends because I joined one of the Indonesian Blogger group on Facebook. And at that time, I was also asked by someone to make his blog theme and I made a decent income.</p>
+                                            
+                                        <p>In 2012, DODE-XP.COM got a lot of traffics and page views could reach 50,000 traffics and 100,000 page views a day. Then I put up ads on my website and get a decent income, at least it can make my parents happy ^^</p>
+                                            
+                                        <p>In 2013 to 2015 I created a website to share Twitter followers with each other, that's where I got a lot of lessons about PHP and a bit mySQL. And hopefully, until 2020 I still remember HTML, CSS and PHP well.</p>       
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h5 class="border-bottom pb-3" style="cursor: help;"><i class="fas fa-link"></i> Contact Me</h5>
+                            <div class="p-3 d-flex justify-content-center">
+                                <!-- Facebook -->
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <a href="https://www.facebook.com/DodePersie" target="_blank" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                                </button>
+                                 <!-- Instagram -->
+                                 <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <a href="https://instagram.com/DodePersie" target="_blank" class="text-white"><i class="fab fa-instagram"></i></a>
+                                </button>         
+                            </div>         
+                        </div>
+                    </div>
+                </div> 
+
+                <!-- Footer -->
+                <footer class="mt-2 p-3 text-center text-lg-start text-muted border-top">
+                    <section class="d-flex justify-content-sm-between justify-content-center">
+                        <!-- Left -->
+                        <div class="me-5 d-lg-block">
+                            Made with <i class="fas fa-heart" aria-hidden="true" style="color:#be1931"></i> by <a class="text-reset fw-bold" href="#">dodemahadi.id</a> @ 2022 - Logged in as 
+                            <span id="checkUsername"></span> <i class="flag flag-id m-1"></i>
+                        </div>
+                        <!-- Left --> 
+
+                        <!-- Right -->
+                        <div> 
+                            <button class="btn btn-primary text-light float-end" type="button" onClick="onLogout()"/><i class="fas fa-sign-out-alt m-1"></i>Logout</button> 
+                        </div>
+                        <!-- Right -->
+                    </section>
+                </footer>              
+            </div>
+        </div>
+
+        <!-- ROLE PREMIUM -->
+        <div id="premiumBody">
+            <div class="container p-3 my-3">
+                Hai user premium? :)
+                <button type="button" class="btn btn-outline-primary btn-rounded float-end" data-mdb-ripple-color="dark" onClick="onLogout()">Logout</button>  
+            </div>
+        </div>
+
+        <!-- ROLE Normal -->
+        <div id="userBody">
+            <div class="container p-3 my-3">
+                Hai user normal? :)
+                <button type="button" class="btn btn-outline-primary btn-rounded float-end" data-mdb-ripple-color="dark" onClick="onLogout()">Logout</button>  
+            </div>
+        </div>    
+        
+        <!-- User not exist -->
+        <div id="userNotExist">
+            <div class="container p-3 my-3">
+                Username and Password not exist.
+                <a href="/">Login again</a>
+            </div>
+        </div>           
+
+        <!-- Main -->
+        <script type="text/javascript" src="script.js"></script>
+
+        <!-- MDB -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.js"></script>
+    </body>
+</html>
